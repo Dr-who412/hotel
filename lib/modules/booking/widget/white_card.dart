@@ -16,6 +16,7 @@ class WhiteCard extends StatelessWidget {
     return Container(
       height: this.hight,
       child: Card(
+        color: Colors.white,
         margin: EdgeInsets.all(8),
         elevation: this.elevet ?? 0.0,
         shape: RoundedRectangleBorder(
