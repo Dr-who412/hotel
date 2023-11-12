@@ -44,6 +44,7 @@ class _CountryPickerWidgetState extends State<CountryPickerWidget> {
         Icons.keyboard_arrow_down,
         color: Colors.grey.withOpacity(.7),
       ),
+      isExpanded: true,
       items: CountryItemList?.map<DropdownMenuItem<CountryItem>>(
           (CountryItem? country) {
         return DropdownMenuItem<CountryItem>(

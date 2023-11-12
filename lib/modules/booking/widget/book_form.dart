@@ -60,7 +60,7 @@ class BookingForm extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             //select reange date
@@ -78,6 +78,9 @@ class BookingForm extends StatelessWidget {
                             ))),
                     child: Row(
                       children: [
+                        const SizedBox(
+                          width: 38,
+                        ),
                         Expanded(
                           child: BlocConsumer<BookingCubit, BookingState>(
                             listener: (context, state) {
@@ -89,7 +92,7 @@ class BookingForm extends StatelessWidget {
                                   showDateRangePickerDialog(
                                     context: context,
                                     builder: datePickerBuilder,
-                                    offset: Offset(0.0,
+                                    offset: Offset(12.0,
                                         MediaQuery.of(context).size.height / 4),
                                     footerBuilder: ({selectedDateRange}) =>
                                         footerPicker(
@@ -121,6 +124,7 @@ class BookingForm extends StatelessWidget {
                             },
                             icon: Icon(
                               Icons.close,
+                              size: 18,
                               color: Colors.grey.withOpacity(.7),
                             ))
                       ],

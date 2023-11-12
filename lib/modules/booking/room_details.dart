@@ -26,13 +26,13 @@ class RoomDetails extends StatelessWidget {
         appBar: AppBar(
           elevation: 3,
           centerTitle: true,
-          leading: SizedBox(),
+          leading: const SizedBox(),
           actions: [
             IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close,
                   color: Colors.black,
                 )),
@@ -46,7 +46,7 @@ class RoomDetails extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.all(14),
+            padding: const EdgeInsets.all(14),
             child: Column(
               children: [
                 //rooms count
@@ -92,7 +92,7 @@ class RoomDetails extends StatelessWidget {
                         ],
                       ),
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 //rooms details
@@ -239,7 +239,7 @@ class RoomDetails extends StatelessWidget {
                         ],
                       ),
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 WhiteCard(
@@ -259,10 +259,10 @@ class RoomDetails extends StatelessWidget {
                                     'Pet-friendy',
                                     style: Appfonts.smallBlack,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 2,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.info_outline,
                                   ),
                                 ],
@@ -299,14 +299,14 @@ class RoomDetails extends StatelessWidget {
                                     activeColor: AppColors.blue,
                                     inactiveThumbColor: Colors.blueGrey,
                                     inactiveTrackColor:
-                                        Color.fromRGBO(235, 236, 238, .6),
+                                        const Color.fromRGBO(235, 236, 238, .6),
                                   );
                                 },
                               ))
                         ],
                       ),
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 80,
                 ),
                 Card(
@@ -323,7 +323,7 @@ class RoomDetails extends StatelessWidget {
                       alignment: Alignment.center,
                       width: double.infinity,
                       height: 46,
-                      margin: EdgeInsets.symmetric(horizontal: 34),
+                      margin: const EdgeInsets.symmetric(horizontal: 34),
                       child: Text(
                         'Apply',
                         style: Appfonts.boldBlack.copyWith(color: Colors.white),
