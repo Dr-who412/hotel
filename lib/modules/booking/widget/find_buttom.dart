@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotels/controller/booking_cubit.dart';
+import 'package:hotels/modules/booking/room_details.dart';
 import 'package:hotels/utils/const/fonts.dart';
 
 class FindButtom extends StatelessWidget {
@@ -11,7 +12,12 @@ class FindButtom extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BookingCubit.get(context).checkValidate();
+        //if(BookingCubit.get(context).checkValidate())
+                    showBottomSheet(
+                        elevation: 0,
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => RoomDetails());
       },
       child: Container(
         width: double.infinity,

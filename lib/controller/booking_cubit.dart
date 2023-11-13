@@ -13,13 +13,17 @@ class BookingCubit extends Cubit<BookingState> {
   TextEditingController selectCity = TextEditingController();
   TextEditingController periodBooking = TextEditingController();
   var formKay = GlobalKey<FormState>();
-  void checkValidate() {
-    formKay.currentState?.validate();
+  bool checkValidate() {
+    return formKay.currentState?.validate()==true;
   }
+  //list of rooms to booked
+List <BookedRoom> bookingRooms=[
+  BookedRoom(num: 1, childern: 0, adults: 1, agesOfChildern: []),
+];
+  BookedRoom? selectedRoom;
 
   CountryItem? selectedCountry;
-  BookedRoom bookingRooms =
-      BookedRoom(num: 1, childern: 0, adults: 1, agesOfChildern: []);
+
   DateRange? pickedrange;
   pickDate(DateRange? range) {
     if (range?.start != null && range?.end != null) {
@@ -37,50 +41,51 @@ class BookingCubit extends Cubit<BookingState> {
 
   //ADD bew details room
   addRoom() {
-    bookingRooms.num = bookingRooms.num + 1;
+    BookedRoom defultRooms =BookedRoom(num: bookingRooms.length+1, childern: 0, adults: 1, agesOfChildern: []);
+    bookingRooms.add(defultRooms);
     emit(ChangeRoomCountState());
   }
 
   removeRoom() {
-    if (bookingRooms.num > 1) {
-      bookingRooms.num = bookingRooms.num - 1;
+    if (bookingRooms.length > 1) {
+      bookingRooms.removeLast();
       emit(ChangeRoomCountState());
     }
   }
 
 //add addults to room
-  addAdults() {
-    bookingRooms.adults = bookingRooms.adults + 1;
+  addAdults({required int index}) {
+    bookingRooms[index].adults = bookingRooms[index].adults + 1;
     emit(ChangeAdultsState());
   }
 //remove addults to room
 
-  removeAdults() {
-    if (bookingRooms.adults >= 1) {
-      bookingRooms.adults = bookingRooms.adults - 1;
+  removeAdults({required int index}) {
+    if (bookingRooms[index].adults >= 1) {
+      bookingRooms[index].adults = bookingRooms[index].adults - 1;
       emit(ChangeAdultsState());
     }
   }
 //add child to room
 
-  addChildern() {
-    bookingRooms.childern = bookingRooms.childern + 1;
-    bookingRooms.agesOfChildern.add(12);
+  addChildern({required int index}) {
+    bookingRooms[index].childern = bookingRooms[index].childern + 1;
+    bookingRooms[index].agesOfChildern.add(12);
     emit(ChangeChildernState());
   }
 //remove child to room
 
-  removeChildern() {
-    if (bookingRooms.childern >= 1) {
-      bookingRooms.childern = bookingRooms.childern - 1;
-      bookingRooms.agesOfChildern.removeLast();
+  removeChildern({required int index} ){
+    if (bookingRooms[index].childern >= 1) {
+      bookingRooms[index].childern = bookingRooms[index].childern - 1;
+      bookingRooms[index].agesOfChildern.removeLast();
 
       emit(ChangeChildernState());
     }
   }
-
-  switchPet(bool value) {
-    bookingRooms.pet = value;
+bool petFriendy=false;
+  switchPet({required bool value}) {
+    petFriendy = value;
     emit(ChangePetState());
   }
 }

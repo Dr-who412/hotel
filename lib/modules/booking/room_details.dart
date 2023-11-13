@@ -79,9 +79,9 @@ class RoomDetails extends StatelessWidget {
                                 },
                                 addEnable: true,
                                 count:
-                                    BookingCubit.get(context).bookingRooms.num,
+                                    BookingCubit.get(context).bookingRooms.length,
                                 removeEnable:
-                                    BookingCubit.get(context).bookingRooms.num >
+                                    BookingCubit.get(context).bookingRooms.length >
                                         1,
                                 removeFun: () {
                                   BookingCubit.get(context).removeRoom();
@@ -96,111 +96,87 @@ class RoomDetails extends StatelessWidget {
                   height: 16,
                 ),
                 //rooms details
-                WhiteCard(
-                    elevet: 4,
-                    radues: 12,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                BlocConsumer<BookingCubit, BookingState>(
+    listener: (context, state) {
+    // TODO: implement listener
+    },
+    // buildWhen: (pre, current) {
+    // if (current is ChangePetState)
+    // return true;
+    // else
+    // return false;
+    // },
+    builder: (context, state) {
+      return Column(
+        children: [
+          for(int index=0;index<BookingCubit.get(context).bookingRooms.length;index++)
+            WhiteCard(
+                elevet: 4,
+                radues: 12,
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Rooms',
+                        style: Appfonts.boldBlack,
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      //todo change adults count
+                      Row(
                         children: [
                           Text(
-                            'Rooms',
-                            style: Appfonts.boldBlack,
+                            'Adults',
+                            style: Appfonts.smallBlack,
                           ),
-                          SizedBox(
-                            height: 6,
+                          Spacer(),
+                          BlocConsumer<BookingCubit, BookingState>(
+                            listener: (context, state) {
+                              // TODO: implement listener
+                            },
+                            buildWhen: (pre, current) {
+                              if (current is ChangeAdultsState)
+                                return true;
+                              else
+                                return false;
+                            },
+                            builder: (context, state) {
+                              return CountWidget(
+                                addFun: () {
+                                  BookingCubit.get(context).addAdults(index: index);
+                                },
+                                addEnable: BookingCubit.get(context)
+                                    .bookingRooms[index]
+                                    .adults <
+                                    4,
+                                count: BookingCubit.get(context)
+                                    .bookingRooms[index]
+                                    .adults,
+                                removeEnable: BookingCubit.get(context)
+                                    .bookingRooms[index]
+                                    .adults >
+                                    1,
+                                removeFun: () {
+                                  BookingCubit.get(context).removeAdults(index: index);
+                                },
+                              );
+                            },
                           ),
-                          //todo change adults count
-                          Row(
-                            children: [
-                              Text(
-                                'Adults',
-                                style: Appfonts.smallBlack,
-                              ),
-                              Spacer(),
-                              BlocConsumer<BookingCubit, BookingState>(
-                                listener: (context, state) {
-                                  // TODO: implement listener
-                                },
-                                buildWhen: (pre, current) {
-                                  if (current is ChangeAdultsState)
-                                    return true;
-                                  else
-                                    return false;
-                                },
-                                builder: (context, state) {
-                                  return CountWidget(
-                                    addFun: () {
-                                      BookingCubit.get(context).addAdults();
-                                    },
-                                    addEnable: BookingCubit.get(context)
-                                            .bookingRooms
-                                            .adults <
-                                        4,
-                                    count: BookingCubit.get(context)
-                                        .bookingRooms
-                                        .adults,
-                                    removeEnable: BookingCubit.get(context)
-                                            .bookingRooms
-                                            .adults >
-                                        1,
-                                    removeFun: () {
-                                      BookingCubit.get(context).removeAdults();
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
+                        ],
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Childern',
+                            style: Appfonts.smallBlack,
                           ),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Childern',
-                                style: Appfonts.smallBlack,
-                              ),
-                              Spacer(),
-                              BlocConsumer<BookingCubit, BookingState>(
-                                listener: (context, state) {
-                                  // TODO: implement listener
-                                },
-                                buildWhen: (pre, current) {
-                                  if (current is ChangeChildernState)
-                                    return true;
-                                  else
-                                    return false;
-                                },
-                                builder: (context, state) {
-                                  return CountWidget(
-                                    addFun: () {
-                                      BookingCubit.get(context).addChildern();
-                                    },
-                                    addEnable: BookingCubit.get(context)
-                                            .bookingRooms
-                                            .childern <
-                                        4,
-                                    count: BookingCubit.get(context)
-                                        .bookingRooms
-                                        .childern,
-                                    removeEnable: BookingCubit.get(context)
-                                            .bookingRooms
-                                            .childern >
-                                        0,
-                                    removeFun: () {
-                                      BookingCubit.get(context)
-                                          .removeChildern();
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 6,
-                          ),
+                          Spacer(),
                           BlocConsumer<BookingCubit, BookingState>(
                             listener: (context, state) {
                               // TODO: implement listener
@@ -212,33 +188,75 @@ class RoomDetails extends StatelessWidget {
                                 return false;
                             },
                             builder: (context, state) {
-                              return Visibility(
-                                visible: BookingCubit.get(context)
-                                        .bookingRooms
-                                        .childern >
+                              return CountWidget(
+                                addFun: () {
+                                  BookingCubit.get(context).addChildern(index: index);
+                                },
+                                addEnable: BookingCubit.get(context)
+                                    .bookingRooms[index]
+                                    .childern <
+                                    4,
+                                count: BookingCubit.get(context)
+                                    .bookingRooms[index]
+                                    .childern,
+                                removeEnable: BookingCubit.get(context)
+                                    .bookingRooms[index]
+                                    .childern >
                                     0,
-                                child: Column(
-                                  children: [
-                                    for (int i = 1;
-                                        i <=
-                                            BookingCubit.get(context)
-                                                .bookingRooms
-                                                .childern;
-                                        i++)
-                                      ChildData(
-                                        age: BookingCubit.get(context)
-                                            .bookingRooms
-                                            .agesOfChildern[i - 1],
-                                        childNum: i,
-                                      ),
-                                  ],
-                                ),
+                                removeFun: () {
+                                  BookingCubit.get(context)
+                                      .removeChildern(index: index);
+                                },
                               );
                             },
-                          )
+                          ),
                         ],
                       ),
-                    )),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      BlocConsumer<BookingCubit, BookingState>(
+                        listener: (context, state) {
+                          // TODO: implement listener
+                        },
+                        buildWhen: (pre, current) {
+                          if (current is ChangeChildernState)
+                            return true;
+                          else
+                            return false;
+                        },
+                        builder: (context, state) {
+                          return Visibility(
+                            visible: BookingCubit.get(context)
+                                .bookingRooms[index]
+                                .childern >
+                                0,
+                            child: Column(
+                              children: [
+                                for (int i = 1;
+                                i <=
+                                    BookingCubit.get(context)
+                                        .bookingRooms[index]
+                                        .childern;
+                                i++)
+                                  ChildData(
+                                    age: BookingCubit.get(context)
+                                        .bookingRooms[index]
+                                        .agesOfChildern[i - 1],
+                                    childNum: i,
+                                  ),
+                              ],
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                )),
+
+        ],
+      );
+    }),
                 const SizedBox(
                   height: 16,
                 ),
@@ -291,11 +309,9 @@ class RoomDetails extends StatelessWidget {
                                 builder: (context, state) {
                                   return Switch(
                                     onChanged: (val) {
-                                      BookingCubit.get(context).switchPet(val);
+                                      BookingCubit.get(context).switchPet(value: val);
                                     },
-                                    value: BookingCubit.get(context)
-                                        .bookingRooms
-                                        .pet,
+                                    value: BookingCubit.get(context).petFriendy,
                                     activeColor: AppColors.blue,
                                     inactiveThumbColor: Colors.blueGrey,
                                     inactiveTrackColor:

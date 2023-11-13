@@ -6,6 +6,7 @@ import 'package:hotels/controller/booking_state.dart';
 import 'package:hotels/model/country.dart';
 import 'package:hotels/modules/booking/room_details.dart';
 import 'package:hotels/modules/booking/widget/range_date/pick_range_dialog.dart';
+import 'package:hotels/modules/booking/widget/roomsDrop.dart';
 import 'package:hotels/modules/booking/widget/white_card.dart';
 import 'package:hotels/utils/const/colors.dart';
 import 'package:hotels/utils/const/fonts.dart';
@@ -149,37 +150,38 @@ class BookingForm extends StatelessWidget {
               hight: 64,
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: BlocConsumer<BookingCubit, BookingState>(
                   listener: (context, state) {
                     // TODO: implement listener
                   },
                   builder: (context, state) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${BookingCubit.get(context).bookingRooms?.num ?? 0} Room, ${BookingCubit.get(context).bookingRooms?.adults ?? 0} Adults, ${BookingCubit.get(context).bookingRooms?.childern ?? 0} Children',
-                          style: Appfonts.small.copyWith(fontSize: 16),
-                        ),
-                        Spacer(),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: GestureDetector(
-                              onTap: () {
-                                showBottomSheet(
-                                    elevation: 0,
-                                    context: context,
-                                    backgroundColor: Colors.transparent,
-                                    builder: (context) => RoomDetails());
-                              },
-                              child: Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Colors.grey.withOpacity(.7),
-                              )),
-                        )
-                      ],
-                    );
+                    return RoomsDropWidget();
+                    //   Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Text(
+                    //       '${BookingCubit.get(context).bookingRooms?.num ?? 0} Room, ${BookingCubit.get(context).bookingRooms?.adults ?? 0} Adults, ${BookingCubit.get(context).bookingRooms?.childern ?? 0} Children',
+                    //       style: Appfonts.small.copyWith(fontSize: 16),
+                    //     ),
+                    //     Spacer(),
+                    //     Align(
+                    //       alignment: Alignment.centerRight,
+                    //       child: GestureDetector(
+                    //           onTap: () {
+                    //             showBottomSheet(
+                    //                 elevation: 0,
+                    //                 context: context,
+                    //                 backgroundColor: Colors.transparent,
+                    //                 builder: (context) => RoomDetails());
+                    //           },
+                    //           child: Icon(
+                    //             Icons.keyboard_arrow_down,
+                    //             color: Colors.grey.withOpacity(.7),
+                    //           )),
+                    //     )
+                    //   ],
+                    // );
                   },
                 ),
               ),
