@@ -119,7 +119,8 @@ class RoomDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Rooms',
+                        'Rooms ${ BookingCubit.get(context)
+                            .bookingRooms[index].num}',
                         style: Appfonts.boldBlack,
                       ),
                       SizedBox(

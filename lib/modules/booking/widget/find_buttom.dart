@@ -21,6 +21,7 @@ class FindButtom extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
+
         padding: EdgeInsets.all(2),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
